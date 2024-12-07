@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Themed Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1 class="title">Assignment 2</h1>
+    <nav>
+      <ul class="menu">
+        <li><a href="randomquote.html">Random Quote Generator</a></li>
+        <li><a href="heroconverter.html">Hero Converter</a></li>
+        <li><a href="magic.html">Magic!</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    
+</body>
+</html>
+
+
+    
+    <section id="converter" class="section">
+        <h2>Hero Converter</h2>
+        <div id="quote-box" class="converter-box">
+            <input type="number" id="convert-input" class="input-field" placeholder="Enter value" oninput="convert()">
+            <select id="convert-type" class="input-field" onchange="convert()">
+                <option value="toKg">lb to kg</option>
+                <option value="toLb">kg to lb</option>
+            </select>
+            <p id="convert-result" class="result-text"></p>
+        </div>
+    </section>
+
+    
+    <section id="statistics" class="section">
+        <h2> Max, Min, Sum, Average and Reverse</h2>
+        <div class="stats-box">
+            <input type="text" id="numbers-input" class="input-field" placeholder="Enter numbers separated by commas" oninput="calculateStats()">
+            <div class="stats-results">
+                <p><strong>Max:</strong> <span id="max-result" class="result-text">-</span></p>
+                <p><strong>Min:</strong> <span id="min-result" class="result-text">-</span></p>
+                <p><strong>Sum:</strong> <span id="sum-result" class="result-text">-</span></p>
+                <p><strong>Average:</strong> <span id="avg-result" class="result-text">-</span></p>
+                <p><strong>Reverse Order:</strong> <span id="reverse-result" class="result-text">-</span></p>
+            </div>
+        </div>
+    </section>
+
+    
+    <script>
+        // Converter
+        function convert() {
+            const value = parseFloat(document.getElementById("convert-input").value);
+            const type = document.getElementById("convert-type").value;
+            const resultSpan = document.getElementById("convert-result");
+
+            if (isNaN(value)) {
+                resultSpan.textContent = "Enter a valid number!";
+                return;
+            }
+
+            if (type === "toKg") {
+                const result = value * 0.4536;  
+                resultSpan.textContent = `${value} lb = ${result.toFixed(2)} kg`;
+            } else {
+                const result = value * 2.2046;  
+                resultSpan.textContent = `${value} kg = ${result.toFixed(2)} lb`;
+            }
+        }
+
+        // Statistics Calculator Function
+        function calculateStats() {
+            const input = document.getElementById("numbers-input").value;
+            const numbers = input.split(",").map(num => parseFloat(num)).filter(num => !isNaN(num));
+
+            if (numbers.length === 0) return;
+
+            let max = numbers[0];
+            let min = numbers[0];
+            let sum = 0;
+            for (let i = 0; i < numbers.length; i++) {
+                sum += numbers[i];
+
+                if (numbers[i] > max) {
+                    max = numbers[i];
+                }
+
+                if (numbers[i] < min) {
+                    min = numbers[i];
+                }
+            }
+
+            const avg = sum / numbers.length;
+
+            
+            const reverse = [];
+            for (let i = numbers.length - 1; i >= 0; i--) {
+                reverse.push(numbers[i]);
+            }
+            const reverseStr = reverse.join(", ");
+
+            
+            document.getElementById("max-result").textContent = max;
+            document.getElementById("min-result").textContent = min;
+            document.getElementById("sum-result").textContent = sum;
+            document.getElementById("avg-result").textContent = avg;
+            document.getElementById("reverse-result").textContent = reverseStr;
+        }
+    </script>
+
+</body>
+</html>

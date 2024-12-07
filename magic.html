@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Themed Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1 class="title">Assignment 2</h1>
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Random Quote Generator</a></li>
+        <li><a href="heroconverter.html">Hero Converter</a></li>
+        <li><a href="magic.html">Magic!</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <p>This is the assignment of cse391</p>
+  </main>
+</body>
+</html>
+<body>
+    <h1>Text Manipulator</h1>
+    <section class="section">
+        <textarea id="text-area" placeholder="Enter text here..."></textarea>
+        <br />
+        <button onclick="clearAll()">Clear All</button>
+        <button onclick="capitalize()">Capitalize</button>
+        <button onclick="sortLines()">Sort</button>
+        <button onclick="reverseLines()">Reverse</button>
+        <button onclick="stripBlank()">Strip Blank</button>
+        <button onclick="addNumbers()">Add Numbers</button>
+        <button onclick="shuffleLines()">Shuffle</button>
+    </section>
+
+    <script>
+        
+        function clearAll() {
+            document.getElementById("text-area").value = "";
+        }
+        
+        
+        function capitalize() {
+            let textArea = document.getElementById("text-area");
+            let text = textArea.value;
+            if (text === text.toUpperCase()) {
+                textArea.value = text.toLowerCase();
+            } else {
+                textArea.value = text.toUpperCase();
+            }
+        }
+        
+       
+        function sortLines() {
+            let textArea = document.getElementById("text-area");
+            let lines = textArea.value.split("\n");
+            lines.sort();
+            textArea.value = lines.join("\n");
+        }
+        
+        
+        function reverseLines() {
+            let textArea = document.getElementById("text-area");
+            let lines = textArea.value.split("\n");
+            for (let i = 0; i < lines.length; i++) {
+                lines[i] = lines[i].split("").reverse().join("");
+            }
+            textArea.value = lines.join("\n");
+        }
+        
+        
+        function stripBlank() {
+            let textArea = document.getElementById("text-area");
+            let lines = textArea.value.split("\n");
+            let newLines = [];
+            for (let i = 0; i < lines.length; i++) {
+                let trimmedLine = lines[i].trim();
+                if (trimmedLine !== "") {
+                    newLines.push(trimmedLine);
+                }
+            }
+            textArea.value = newLines.join("\n");
+        }
+        
+        
+        function addNumbers() {
+            let textArea = document.getElementById("text-area");
+            let lines = textArea.value.split("\n");
+            let numberedLines = [];
+            for (let i = 0; i < lines.length; i++) {
+                numberedLines.push((i + 1) + ". " + lines[i]);
+            }
+            textArea.value = numberedLines.join("\n");
+        }
+        
+        
+        function shuffleLines() {
+            let textArea = document.getElementById("text-area");
+            let lines = textArea.value.split("\n");
+            for (let i = lines.length - 1; i > 0; i--) {
+                let randomIndex = Math.floor(Math.random() * (i + 1));
+                let temp = lines[i];
+                lines[i] = lines[randomIndex];
+                lines[randomIndex] = temp;
+            }
+            textArea.value = lines.join("\n");
+        }
+        
+
+    </script>
+</body>
+</html>
